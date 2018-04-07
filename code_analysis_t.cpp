@@ -55,8 +55,43 @@ int main() {
         assert(analysis_language(request, filename) == "C++");
         assert(code_analysis(request) == false);
 	    
+	//This will test a condition in rule 7, as well as an error code in code_analysis
+	request.given_filename  = "-";
+        request.entry_filename  = "data";
+        request.given_url       = "";
+        request.option_filename = "";
+        request.option_url      = "";
+        request.option_language = "";
+
+        auto filename = analysis_filename(request);
+        assert(filename == "");
+        assert(analysis_url(request) == "");
+        assert(analysis_language(request, filename) == "");
+        assert(code_analysis(request) == false);
+	    
+	//This will test another rule in rule 7
+	request.given_filename  = "-";
+        request.entry_filename  = "File";
+        request.given_url       = "";
+        request.option_filename = "";
+        request.option_url      = "";
+        request.option_language = "";
+
+        auto filename = analysis_filename(request);
+        assert(filename == "File");
+        assert(analysis_url(request) == "");
+        assert(analysis_language(request, filename) == "");
+        assert(code_analysis(request) == false);
 	
-	
+	//This will trigger the second error code 
+	request.given_filename  = "File";
+        request.entry_filename  = "data";
+	    
+	auto filename = analysis_filename(request);
+        assert(filename == "File");
+        assert(analysis_url(request) == "");
+        assert(analysis_language(request, filename) == "");
+        assert(code_analysis(request) == false);
     }
 
     return 0;
