@@ -46,7 +46,16 @@ int main() {
         assert(analysis_language(request, filename) == "C++");
         assert(code_analysis(request) == false);
 	    
+	//This will test rule 3 by assigning entry_filename as "data"
+        request.given_filename  = "Filename_1.cpp";
+        request.entry_filename  = "data";
+
+        auto filename = analysis_filename(request);
+        assert(filename == "Filename_1.cpp");
+        assert(analysis_language(request, filename) == "C++");
+        assert(code_analysis(request) == false);
 	    
+	
 	
     }
 
