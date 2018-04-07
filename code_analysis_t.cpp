@@ -27,6 +27,27 @@ int main() {
         assert(analysis_url(request) == "URL_1");
         assert(analysis_language(request, filename) == "Language_1");
         assert(code_analysis(request) == false);
+	    
+	    
+	// Objects with underscore 1 are the desired outcome of the tests
+	// Fixed an error with rule 2
+	// Testing that the analysis follows rule 2 for entry filename and that the language table function works
+        
+        request.given_filename  = "Filename_2.cpp";
+        request.entry_filename  = "Filename_1.cpp";
+        request.given_url       = "URL_1";
+        request.option_filename = "";
+        request.option_url      = "";
+        request.option_language = "";
+
+        auto filename = analysis_filename(request);
+        assert(filename == "Filename_1.cpp");
+        assert(analysis_url(request) == "URL_1");
+        assert(analysis_language(request, filename) == "C++");
+        assert(code_analysis(request) == false);
+	    
+	    
+	
     }
 
     return 0;
