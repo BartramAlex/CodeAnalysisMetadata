@@ -22,39 +22,39 @@
 ## Build
 % make
 
-code_analysis_t.cpp:43:14: error: redefinition of 'filename'
-        auto filename = analysis_filename(request);
-             ^
-code_analysis_t.cpp:25:14: note: previous definition is here
-        auto filename = analysis_filename(request);
-             ^
-code_analysis_t.cpp:53:14: error: redefinition of 'filename'
-        auto filename = analysis_filename(request);
-             ^
-code_analysis_t.cpp:25:14: note: previous definition is here
-        auto filename = analysis_filename(request);
-             ^
-code_analysis_t.cpp:66:14: error: redefinition of 'filename'
-        auto filename = analysis_filename(request);
-             ^
-code_analysis_t.cpp:25:14: note: previous definition is here
-        auto filename = analysis_filename(request);
-             ^
-code_analysis_t.cpp:80:14: error: redefinition of 'filename'
-        auto filename = analysis_filename(request);
-             ^
-code_analysis_t.cpp:25:14: note: previous definition is here
-        auto filename = analysis_filename(request);
-             ^
-code_analysis_t.cpp:90:7: error: redefinition of 'filename'
-        auto filename = analysis_filename(request);
-             ^
-code_analysis_t.cpp:25:14: note: previous definition is here
-        auto filename = analysis_filename(request);
-             ^
-5 errors generated.
-make: *** [code_analysis_t.o] Error 1
     g++ -std=c++11 -c code_analysis_t.cpp
+    code_analysis_t.cpp:43:14: error: redefinition of 'filename'
+            auto filename = analysis_filename(request);
+                 ^
+    code_analysis_t.cpp:25:14: note: previous definition is here
+            auto filename = analysis_filename(request);
+                 ^
+    code_analysis_t.cpp:53:14: error: redefinition of 'filename'
+            auto filename = analysis_filename(request);
+                 ^
+    code_analysis_t.cpp:25:14: note: previous definition is here
+            auto filename = analysis_filename(request);
+                 ^
+    code_analysis_t.cpp:66:14: error: redefinition of 'filename'
+            auto filename = analysis_filename(request);
+                 ^
+    code_analysis_t.cpp:25:14: note: previous definition is here
+            auto filename = analysis_filename(request);
+                 ^
+    code_analysis_t.cpp:80:14: error: redefinition of 'filename'
+            auto filename = analysis_filename(request);
+                 ^
+    code_analysis_t.cpp:25:14: note: previous definition is here
+            auto filename = analysis_filename(request);
+                 ^
+    code_analysis_t.cpp:90:7: error: redefinition of 'filename'
+            auto filename = analysis_filename(request);
+                 ^
+    code_analysis_t.cpp:25:14: note: previous definition is here
+            auto filename = analysis_filename(request);
+                 ^
+    5 errors generated.
+    make: *** [code_analysis_t.o] Error 1
 
 ## Test
 % make test
@@ -206,49 +206,49 @@ make: *** [code_analysis_t.o] Error 1
 
 ## Code
 % srcml code_analysis.cpp code_analysis_t.cpp -o project.xml
-% srcml --xpath="//src:function[src:name='code_analysis']" project.xml | srcml | cat -v
+% srcml --xpath="//src:function[src:name='code_analysis']" project.xml | srcml
 
-    bool code_analysis(const analysis_request& request) {
-    
-        auto filename = analysis_filename(request);
-    
-        auto url = analysis_url(request);
-    
-        auto language = analysis_language(request, filename);
-    
-        // code analysis processing that is not yet implemented
-    
-        return false;
-    }
+     1 bool code_analysis(const analysis_request& request) {
+     2 
+     3     auto filename = analysis_filename(request);
+     4 
+     5     auto url = analysis_url(request);
+     6 
+     7     auto language = analysis_language(request, filename);
+     8 
+     9     // code analysis processing that is not yet implemented
+    10 
+    11     return false;
+    12 }
 
-% srcml --xpath="//src:function[src:name='analysis_filename']" project.xml | srcml | cat -v
+% srcml --xpath="//src:function[src:name='analysis_filename']" project.xml | srcml
 
-    std::string analysis_filename(const analysis_request& request) {
-    
-        return "";
-    }
+     1 std::string analysis_filename(const analysis_request& request) {
+     2 
+     3     return "";
+     4 }
 
-% srcml --xpath="//src:function[src:name='analysis_url']" project.xml | srcml | cat -v
+% srcml --xpath="//src:function[src:name='analysis_url']" project.xml | srcml
 
-    std::string analysis_url(const analysis_request& request) {
-    
-        return "";
-    }
+     1 std::string analysis_url(const analysis_request& request) {
+     2 
+     3     return "";
+     4 }
 
-% srcml --xpath="//src:function[src:name='analysis_language']" project.xml | srcml | cat -v
+% srcml --xpath="//src:function[src:name='analysis_language']" project.xml | srcml
 
-    std::string analysis_language(const analysis_request& request, const std::string& filename) {
-    
-        return "";
-    }
+     1 std::string analysis_language(const analysis_request& request, const std::string& filename) {
+     2 
+     3     return "";
+     4 }
 
 ## Test Cases 
-% srcml code_analysis_t.cpp --xpath="//src:function[src:name='main']/src:block" | srcml | cat -v
+% srcml code_analysis_t.cpp --xpath="//src:function[src:name='main']/src:block" | srcml
 
     {
     
         // Objects with underscore 1 are the desired outcome of the tests
-    	// This test is to assert that option cases take precedence in all analysis tests
+        // This test is to assert that option cases take precedence in all analysis tests
         {
             analysis_request request;
             request.given_filename  = "Filename_2";
@@ -263,11 +263,11 @@ make: *** [code_analysis_t.o] Error 1
             assert(analysis_url(request) == "URL_1");
             assert(analysis_language(request, filename) == "Language_1");
             assert(code_analysis(request) == false);
-    	    
-    	    
-    	// Objects with underscore 1 are the desired outcome of the tests
-    	// Fixed an error with rule 2
-    	// Testing that the analysis follows rule 2 for entry filename and that the language table function works
+            
+            
+        // Objects with underscore 1 are the desired outcome of the tests
+        // Fixed an error with rule 2
+        // Testing that the analysis follows rule 2 for entry filename and that the language table function works
             
             request.given_filename  = "Filename_2.cpp";
             request.entry_filename  = "Filename_1.cpp";
@@ -281,8 +281,8 @@ make: *** [code_analysis_t.o] Error 1
             assert(analysis_url(request) == "URL_1");
             assert(analysis_language(request, filename) == "C++");
             assert(code_analysis(request) == false);
-    	    
-    	//This will test rule 3 by assigning entry_filename as "data"
+            
+        //This will test rule 3 by assigning entry_filename as "data"
             request.given_filename  = "Filename_1.cpp";
             request.entry_filename  = "data";
     
@@ -290,9 +290,9 @@ make: *** [code_analysis_t.o] Error 1
             assert(filename == "Filename_1.cpp");
             assert(analysis_language(request, filename) == "C++");
             assert(code_analysis(request) == false);
-    	    
-    	//This will test a condition in rule 7, as well as an error code in code_analysis
-    	request.given_filename  = "-";
+            
+        //This will test a condition in rule 7, as well as an error code in code_analysis
+        request.given_filename  = "-";
             request.entry_filename  = "data";
             request.given_url       = "";
             request.option_filename = "";
@@ -304,9 +304,9 @@ make: *** [code_analysis_t.o] Error 1
             assert(analysis_url(request) == "");
             assert(analysis_language(request, filename) == "");
             assert(code_analysis(request) == false);
-    	    
-    	//This will test another rule in rule 7
-    	request.given_filename  = "-";
+            
+        //This will test another rule in rule 7
+        request.given_filename  = "-";
             request.entry_filename  = "File";
             request.given_url       = "";
             request.option_filename = "";
@@ -318,12 +318,12 @@ make: *** [code_analysis_t.o] Error 1
             assert(analysis_url(request) == "");
             assert(analysis_language(request, filename) == "");
             assert(code_analysis(request) == false);
-    	
-    	//This will trigger the second error code 
-    	request.given_filename  = "File";
+        
+        //This will trigger the second error code 
+        request.given_filename  = "File";
             request.entry_filename  = "data";
-    	    
-    	auto filename = analysis_filename(request);
+            
+        auto filename = analysis_filename(request);
             assert(filename == "File");
             assert(analysis_url(request) == "");
             assert(analysis_language(request, filename) == "");
@@ -341,6 +341,7 @@ make: *** [code_analysis_t.o] Error 1
 
 ## Error Messages
 % srcml code_analysis.cpp --xpath="//src:function[src:name='code_analysis']//src:expr[contains(., 'cerr')]//src:literal" | srcml | tr '\0'  '\n'
+
 
 
 ## Commits
@@ -403,6 +404,7 @@ make: *** [code_analysis_t.o] Error 1
          }
      
 
+
 ### Commit cda254
 % git checkout -q cda254  
 % make  
@@ -463,6 +465,7 @@ make: *** [code_analysis_t.o] Error 1
      
          return 0;
 
+
 ### Commit 7c11e1
 % git checkout -q 7c11e1  
 % make  
@@ -515,6 +518,7 @@ make: *** [code_analysis_t.o] Error 1
          }
      
          return 0;
+
 
 ### Commit cea73d
 % git checkout -q cea73d  
